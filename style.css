@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+}
+
+.header {
+    font-size: 300%;
+    text-align: center;
+}
+
+.button {
+    text-align: center;
+    background-color: rgb(59, 221, 221);
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 8px 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.button1 {
+    background-color: rgb(120, 177, 120);
+}
+
+.button2 {
+    background-color: rgb(160, 59, 19);
+}
+
+.button3 {
+    background-color: rgb(23, 24, 23);
+    color: white;
+}
+
+.button4 {
+    background-color: rgb(38, 31, 148);
+}
+
+.button5 {
+    background-color: rgb(9, 192, 9);
+}
+
+.divbutton{
+    text-align: center;
+    background-color: rgb(139, 168, 57);
+}
