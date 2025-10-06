@@ -1,0 +1,190 @@
+body {
+    margin: 0;
+}
+
+.header {
+    font-size: 300%;
+    font-style: italic;
+    padding: 10px;
+    color: white;
+    text-align: center;
+}
+
+.header1{
+    background-color: rgb(86, 165, 189);  
+}
+
+.header2{
+    background-color: rgb(109, 47, 23);  
+}
+.header3{
+    background-color: rgb(23, 24, 23);  
+}
+.header4{
+    background-color: rgb(38, 31, 148);  
+}
+.header5{
+    background-color: rgb(35, 167, 35);  
+}
+
+
+.button {
+    text-align: center;
+    background-color: rgb(59, 221, 221);
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 8px 50px;
+    cursor: pointer;
+    border: none;
+}
+
+.button1 {
+    background-color: rgb(86, 165, 189);
+    color: white;
+}
+
+.button2 {
+    background-color: rgb(109, 47, 23);
+    color: white;
+}
+
+.button3 {
+    background-color: rgb(23, 24, 23);
+    color: white;
+}
+
+.button4 {
+    background-color: rgb(38, 31, 148);
+    color: white;
+}
+
+.button5 {
+    background-color: rgb(35, 167, 35);
+    color: white;
+}
+
+.divbutton{
+    text-align: center;
+    background-image: url(obrazy/fjordy2.jpg);
+    padding: 75px;
+    background-size: cover;
+}
+
+.strgbody1{
+    padding: 50px 100px;
+    margin: 50px 100px;
+    background-color: rgb(115, 164, 179);
+    font-size: 100%;
+    color: white;
+}
+
+.strgobraz{
+    width: 50%;
+    height: 50%;
+    float: left;
+    position: relative;
+    right: 20px;
+}
+
+.lokacjaobraz{
+    width: 500px;
+    height: 500px;
+    float: right;
+    position: relative;
+    left: 10px;
+}
+
+.lokacjabody{
+    padding: 25px 100px;
+    margin: 25px 100px;
+    background-color: rgb(109, 47, 23);
+    color: white;
+    font-size: 100%;
+}
+
+.flaga{
+    float: left;
+    position: relative;
+    left: 100px;
+    width: 130px;
+    height: 75px;
+}
+
+.historiabody{
+    padding: 25px 100px;
+    margin: 25px 100px;
+    background-color: rgb(23, 24, 23);
+    color: white;
+    font-size: 110%;
+}
+
+.historiaobraz1{
+    float: left;
+    position: relative;
+    right: 50px;
+    height: 40%;
+    width: 40%;
+    top: 10px;
+}
+
+.historiaobraz2{
+    float: right;
+    position: relative;
+    left: 50px;
+    height: 40%;
+    width: 40%;
+    top: 50px;
+}
+
+.ciekawostkibody{
+    padding: 25px 100px;
+    margin: 25px 100px;
+    background-color: rgb(38, 31, 148);
+    color: white;
+    font-size: 110%;
+}
+
+.faunaflorabody{
+    background-color: rgb(28, 105, 28);
+    padding: 25px 100px;
+    margin: 25px 100px;
+    color: white;
+    font-size: 110%;
+}
+
+.faunaobraz{
+    float: right;
+    position: relative;
+    left: 50px;
+    height: 40%;
+    width: 40%;
+    top: 50px;
+}
+
+.floraobraz{
+    float: left;
+    position: relative;
+    right: 50px;
+    height: 40%;
+    width: 40%;
+    top: 50px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+td{
+    border: 2px solid black;
+    padding: 10px;
+    text-align: left;
+    background-color: rgb(58, 165, 58);
+}
+
+th{
+    text-align: center;
+    background-color: rgb(27, 134, 27);
+    color: white;
+    border: 1px solid black;
+    border: 2px solid black;
+}
