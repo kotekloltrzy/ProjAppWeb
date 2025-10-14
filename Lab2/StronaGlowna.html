@@ -17,10 +17,9 @@
     <a href="Ciekawostki.html"><button class="button button4"> Ciekawostki</button></a>
     <a href="FaunaFlora.html"><button class="button button5"> Fauna i Flora</button></a>
     </div>
-    <script src="timedate.js" type="text/JavaScript"></script>
 </head>
 
-<body onload="startclock()">
+<body onload="startClock()">
 
     <div class="strgbody1">
         <img class="strgobraz" src="obrazy/fjordy4.jpg">
@@ -48,6 +47,7 @@
     </div>
     
     <script src="kolorujtlo.js" type="text/JavaScript"></script>
+    <script src="timedate.js" type="text/JavaScript"></script>
 
     <div class="strgbody1 kolorujtlo">
 
@@ -64,15 +64,9 @@
 
     </div>
 
-    <div class="strgbody1" id="zegarek" onload="showtime()">
+    <div class="strgbody1">
         
-        <b>Czas ładowania strony: </b>
-
-    </div>
-
-    <div class="strgbody1" id="data">
-
-
+        <b>Data: <span id="data"></span>, <span id="zegarek"></span></b>
 
     </div>
 
