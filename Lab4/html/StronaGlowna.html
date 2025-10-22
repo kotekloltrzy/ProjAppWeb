@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projekt 1">
+    <meta name="keywords" content="HTML5, CSS3, JavaScript">
+    <meta name="author" content="Michał Broda">
+    <link rel="stylesheet" href="style.css"> 
+    <img class="flaga" src="obrazy/flaga.png">
+    <title>Najpiękniejsze miesjce w świecie</title>
+    <header class="header header1"> Najpiękniejsze miesjce w świecie </header>
+    <div class="divbutton">
+    <a href="StronaGlowna.html"><button class="button button1"> Strona główna</button></a>
+    <a href="Lokacja.html"><button class="button button2"> Lokacja</button></a>
+    <a href="Historia.html"><button class="button button3"> Historia</button></a>
+    <a href="Ciekawostki.html"><button class="button button4"> Ciekawostki</button></a>
+    <a href="FaunaFlora.html"><button class="button button5"> Fauna i Flora</button></a>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body onload="startClock()">
+
+    <div class="strgbody1">
+        <img class="strgobraz" src="obrazy/fjordy4.jpg">
+        <p><b>
+            <br>
+            Norweskie fiordy uważane jako jedne z najpiększniejszych miejsc na świecie<br>
+            <br>
+            Na ich majestatyczne klifach można poczuć się jak na granicy snu i rzeczywistości<br>
+            <br>
+            Woda jest tak spokojna, że odbija niebo jak lustro <br>
+            <br>
+            Każdy oddech tam wydaje się czysty, głebszy, bardziej prawdziwy <br>
+            <br>
+            Cisza między górami ma w sobie coś mistycznego. <br>
+            <br>
+            Zieleń traw kontrastuje z szarością skał w idealnej harmonii. <br>
+            <br>
+            Czasem mgła spowija wszystko, jakby chciała zachować tę tajemnicę. <br>
+            <br>
+            Każdy fiord ma swoją duszę, swój rytm i historię. <br>
+            <br>
+            Żadne zdjęcie nie odda tego uczucia spokoju i zachwytu. <br>
+            <br>
+            </p></b>
+    </div>
+    
+    <script src="kolorujtlo.js" type="text/JavaScript"></script>
+    <script src="timedate.js" type="text/JavaScript"></script>
+
+    <div class="strgbody1 kolorujtlo">
+
+        <form method="post" name="background">
+            <input class="buttonkoloruj button6" type="button" value="żółty" onclick="changeBackground('#FFF000')">
+            <input class="buttonkoloruj button7" type="button" value="czarny" onclick="changeBackground('#000000')">
+            <input class="buttonkoloruj button8" type="button" value="biały" onclick="changeBackground('#FFFFFF')">
+            <input class="buttonkoloruj button9" type="button" value="zielony" onclick="changeBackground('#00FF00')">
+            <input class="buttonkoloruj button10" type="button" value="niebieski" onclick="changeBackground('#0000FF')">
+            <input class="buttonkoloruj button11" type="button" value="pomarańczowy" onclick="changeBackground('#FF8000')">
+            <input class="buttonkoloruj button12" type="button" value="szary" onclick="changeBackground('#c0c0c0')">
+            <input class="buttonkoloruj button13" type="button" value="czerwony" onclick="changeBackground('#FF0000')">
+        </form>
+
+    </div>
+
+    <div class="strgbody1">
+        
+        <b>Data: <span id="data"></span>, <span id="zegarek"></span></b>
+
+    </div>
+
+    <div id="animacjaTestowa1" class="test-block">
+        Kliknij a się powiększe
+    </div>
+
+    <script>
+        $("#animacjaTestowa1").on("click", function(){
+            $(this).animate({
+                width: "500px",
+                opacity: 0.4,
+                fontsize: "3em",
+                borderwidth: "10px"
+            }, 1500);
+        });
+    </script>
+
+    <div id="animacjaTestowa2" class="test-block">
+        Najedź kursorem, a się powiększe
+    </div>
+
+    <script>
+        $("#animacjaTestowa2").on({
+            "mouseover" : function() {
+                $(this).animate({
+                    width: 300
+                }, 800);
+            },
+            "mouseout" : function(){
+                $(this).animate({
+                    width: 200
+                }, 800);
+            }
+        });
+    </script>
+
+    <div id="animacjaTestowa3" class="test-block">
+        Klikaj, abym urósł
+    </div>
+
+    <script>
+        $("#animacjaTestowa3").on("click", function(){
+            if (!$(this).is(":animated")) {
+                $(this).animate({
+                    width: "+=" + 50,
+                    height: "+=" + 10,
+                    opacity: "-=" + 0.1,
+                    duration: 3000
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>

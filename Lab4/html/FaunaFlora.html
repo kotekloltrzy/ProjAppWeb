@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projekt 1">
+    <meta name="keywords" content="HTML5, CSS3, JavaScript">
+    <meta name="author" content="Michał Broda">
+    <link rel="stylesheet" href="style.css"> 
+    <title>Najpiękniejsze miesjce w świecie</title>
+    <img class="flaga" src="obrazy/flaga.png">
+    <header class="header header5"> Fauna i Flora </header>
+    <div class="divbutton">
+    <a href="StronaGlowna.html"><button class="button button1"> Strona główna</button></a>
+    <a href="Lokacja.html"><button class="button button2"> Lokacja</button></a>
+    <a href="Historia.html"><button class="button button3"> Historia</button></a>
+    <a href="Ciekawostki.html"><button class="button button4"> Ciekawostki</button></a>
+    <a href="FaunaFlora.html"><button class="button button5"> Fauna i Flora</button></a>
+    </div>
+</head>
+
+<body>
+    <div class="faunaflorabody">
+
+        <table class="tabela">
+            <tr>
+                <th colspan="3">Fauna</th>
+                <th colspan="3">Flora</th>
+            </tr>
+            <tr>
+                <td rowspan="4">Ssaki morskie</td><td>Orki</td><td>Można je spotkać w północnych fiordach. To jedne z największych<br>drapieżników morskich</td>
+                <td rowspan="9">Drzewa i krzewy</td><td>Brzozy</td><td rowspan="3">Dominują w niższych partiach fiordów</td>
+            </tr><tr>
+                <td>Humbaki</td><td>Pojawiają się w fiordach zimą, kiedy polują na ławice śledzi</td>
+                <td>Sosny</td>
+            </tr><tr>
+                <td>Foki</td><td>Często wylegują się na skałach przy ujściach fiordów</td>
+                <td>Świerki</td>
+            </tr><tr>
+                <td>Morświny</td><td>Małe krewniaki delfinów, żyjące w spokojniejszych wodach fiordów</td>
+                <td>Jarzębiny</td><td rowspan="3">Często rosną na zboczach i w dolinach rzecznych</td>
+            </tr><tr>
+                <td rowspan="5">Ryby</td><td>Śledź</td><td rowspan="4">To najczęściej występujące gatunki, ważne również dla norweskiego<br>rybołustwa</td>
+                <td>Olsze</td>
+            </tr><tr>
+                <td>Dorsz</td>
+                <td>Wierzby</td>
+            </tr><tr>
+                <td>Makrela</td>
+                <td>Krzewinki borówki</td><td rowspan="3">Występują wyżej, w chłodniejszych rejonach</td>
+            </tr><tr>
+                <td>Czarniak</td>
+                <td>Wrzosy</td>
+            </tr><tr>
+                <td>Łosoś atlantycki</td><td>Częsty w górnych odcinkach fiordów, gdzie wody są słodsze<br>Norwegia jest jednym z największych prodecentów hodowlanego łososia</td>
+                <td>Jałowce</td>
+            </tr><tr>
+                <td rowspan="6">Ptaki</td><td>Bielik zwyczajny</td><td>Majestatyczny drapieżnik, często widziany nad Geirangerfjordem i Sognefjordem</td>
+                <td rowspan="6">Rośliny łąkowe<br>i górskie</td><td>Dzwonki</td><td rowspan="4">Typowe dla górskich zboczy nad fiordami</td>
+            </tr><tr>
+                <td>Maskonury</td><td>Urocze ptaki morskie z kolorowymi dziobami, żyjące na klifach wybrzeża</td>
+                <td>Jaskry</td>
+            </tr><tr>
+                <td>Mewy</td><td rowspan="3">Powszechne wzdłuż fiordów; tworzą duże kolonie lęgowe</td>
+                <td>Fiołki arktyczne</td>
+            </tr><tr>
+                <td>Kormorany</td>
+                <td>Skalnice</td>
+            </tr><tr>
+                <td>Edredony</td>
+                <td>Mchy</td><td rowspan="2">Pokrywają skały i tworzą miękkie dywany w wilgotnym klimacie</td>
+            </tr><tr>
+                <td>Sowy</td><td>Żyją w lasach otaczających</td>
+                <td>Porosty</td>
+            </tr><tr>
+                <td rowspan="6">Ssaki lądowe</td><td>Jelenie</td><td rowspan="3">Spotykane na terenach leśnych i górskich wokół fiordów</td>
+                <td rowspan="6">Roślinność morska</td><td>Wodorosty</td><td rowspan="2">tworzą podwodne lasy wzdłuż brzegów fiordów; są schronieniem dla ryb i skorupiaków</td>
+            </tr><tr>
+                <td>Łosie</td>
+                <td>Glony brunatne</td>
+            </tr><tr>
+                <td>Renifery</td>
+                <td>Zielenice</td><td rowspan="2">Występują w płytszych wodach</td>
+            </tr><tr>
+                <td>Lisy polarne</td><td rowspan="2">Źyją w chłodniejszych rejonach</td>
+                <td>Krasnorosty</td>
+            </tr><tr>
+                <td>Kuny</td>
+                <td>Ulwa sałatowa</td><td>Zielony glon wyglądający jak liście sałaty występujący przy skałach i przystaniach</td>
+            </tr><tr>
+                <td>Owce</td><td>Typowy widok na boczach fiordów; często pasą się niam pionowo na wodą</td>
+                <td>Alaria jadalna</td><td>Ma zastosowanie w kuchni i produkcji suplementów diety</td>
+            </tr>
+
+        </table>
+    
+    </div>
+
+    <script src="kolorujtlo.js" type="text/JavaScript"></script>
+
+    <div class="faunaflorabody kolorujtlo">
+
+        <form method="post" name="background">
+            <input class="buttonkoloruj button6" type="button" value="żółty" onclick="changeBackground('#FFF000')">
+            <input class="buttonkoloruj button7" type="button" value="czarny" onclick="changeBackground('#000000')">
+            <input class="buttonkoloruj button8" type="button" value="biały" onclick="changeBackground('#FFFFFF')">
+            <input class="buttonkoloruj button9" type="button" value="zielony" onclick="changeBackground('#00FF00')">
+            <input class="buttonkoloruj button10" type="button" value="niebieski" onclick="changeBackground('#0000FF')">
+            <input class="buttonkoloruj button11" type="button" value="pomarańczowy" onclick="changeBackground('#FF8000')">
+            <input class="buttonkoloruj button12" type="button" value="szary" onclick="changeBackground('#c0c0c0')">
+            <input class="buttonkoloruj button13" type="button" value="czerwony" onclick="changeBackground('#FF0000')">
+        </form>
+
+    </div>
+
+
+</body>
+
+</html>
