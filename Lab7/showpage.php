@@ -3,10 +3,8 @@ function PokazPodstrone($id)
 {
     global $mysqli;
 
-    // zabezpieczenie przed wstrzykniêciami
     $id_clear = intval($id);
 
-    // przygotowane zapytanie
     $stmt = $mysqli->prepare("SELECT page_content FROM page_list WHERE id = ? LIMIT 1");
     $stmt->bind_param("i", $id_clear);
     $stmt->execute();
