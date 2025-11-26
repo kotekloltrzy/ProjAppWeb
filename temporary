@@ -1,0 +1,106 @@
+<?php
+
+require_once("cfg.php");
+
+/* ============================================================
+   1. FORMULARZ KONTAKTOWY – Wyświetlanie
+   ============================================================ */
+function PokazKontakt($komunikat = "")
+{
+    echo "
+    <h2>Formularz kontaktowy</h2>
+
+    <form method='post' action='contact.php?send=1'>
+        Imię:<br>
+        <input type='text' name='name' required><br><br>
+
+        Email:<br>
+        <input type='email' name='email' required><br><br>
+
+        Treść wiadomości:<br>
+        <textarea name='message' rows='8' cols='50' required></textarea><br><br>
+
+        <input type='submit' value='Wyślij wiadomość'>
+    </form>
+
+    <div style='color:green;'>$komunikat</div>
+    ";
+}
+
+/* ============================================================
+   2. WYSYŁANIE MAILA
+   ============================================================ */
+function WyslijMailKontakt()
+{
+    if (!isset($_POST['email']) || !isset($_POST['message'])) {
+        PokazKontakt("Nie wypełniłeś wszystkich pól.");
+        return;
+    }
+
+    $name    = htmlspecialchars($_POST['name']);
+    $email   = htmlspecialchars($_POST['email']);
+    $message = htmlspecialchars($_POST['message']);
+
+    // Adres odbiorcy – twój email z cfg.php
+    global $mail_to;
+
+    $subject = "Wiadomość z formularza kontaktowego od: $name";
+
+    $mail_body = "Imię: $name\nEmail: $email\n\nTreść wiadomości:\n$message";
+
+    mail($mail_to, $subject, $mail_body);
+
+    echo "<h3>Wiadomość została wysłana!</h3>";
+    echo "<a href='contact.php'>Powrót</a>";
+}
+
+/* ============================================================
+   3. PRZYPOMNIJ HASŁO
+   ============================================================ */
+function PrzypomnijHaslo()
+{
+    global $login, $pass, $mail_to;
+
+    // Formularz:
+    if (!isset($_POST['remind'])) {
+        echo "
+        <h2>Przypomnienie hasła</h2>
+
+        <form method='post' action='contact.php?remind=1'>
+            Wpisz email administratora:<br>
+            <input type='email' name='email' required><br><br>
+            <input type='submit' name='remind' value='Wyślij przypomnienie'>
+        </form>
+        ";
+        return;
+    }
+
+    // Obsługa wysyłki
+    if ($_POST['email'] == $mail_to) {
+
+        $body = "Twoje dane logowania do panelu:\n\nLogin: $login\nHasło: $pass\n";
+
+        mail($mail_to, "Przypomnienie hasła", $body);
+
+        echo "<h3>Hasło zostało wysłane na email administratora.</h3>";
+    } else {
+        echo "<div style='color:red;'>Podany email jest nieprawidłowy.</div>";
+    }
+
+    echo "<br><a href='contact.php'>Powrót</a>";
+}
+
+/* ============================================================
+   ROUTER – wybór akcji
+   ============================================================ */
+if (isset($_GET['send'])) {
+    WyslijMailKontakt();
+}
+elseif (isset($_GET['remind'])) {
+    PrzypomnijHaslo();
+}
+else {
+    PokazKontakt(); // widok domyślny
+}
+
+?>
