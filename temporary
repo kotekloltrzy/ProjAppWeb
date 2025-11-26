@@ -1,78 +1,133 @@
 <?php
-require_once("cfg.php");
 
+require_once(__DIR__ . "/cfg.php");
+
+// załaduj PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require_once __DIR__ . "/PHPMailer/src/PHPMailer.php";
+require_once __DIR__ . "/PHPMailer/src/SMTP.php";
+require_once __DIR__ . "/PHPMailer/src/Exception.php";
+
+
+// -----------------------------------------------------
+// 1. Formularz kontaktowy
+// -----------------------------------------------------
 function PokazKontakt()
 {
-    // Formularz kontaktowy – po wysłaniu wywoła tę samą stronę
     echo '
     <h2>Formularz kontaktowy</h2>
-
-    <form method="post" action="">
+    <form method="post" action="contact.php">
         <label>Imię:</label><br>
         <input type="text" name="imie" required><br><br>
 
         <label>Email:</label><br>
         <input type="email" name="email" required><br><br>
 
-        <label>Treść wiadomości:</label><br>
-        <textarea name="wiadomosc" rows="7" cols="50" required></textarea><br><br>
+        <label>Temat:</label><br>
+        <input type="text" name="temat" required><br><br>
+
+        <label>Wiadomość:</label><br>
+        <textarea name="wiadomosc" rows="8" cols="50" required></textarea><br><br>
 
         <input type="submit" name="wyslij" value="Wyślij wiadomość">
     </form>
+
+    <br><br>
+    <a href="contact.php?przypomnij=1">Przypomnij hasło do panelu admina</a>
     ';
 }
 
+
+// -----------------------------------------------------
+// 2. Wysyłanie wiadomości przez SMTP
+// -----------------------------------------------------
 function WyslijMailKontakt()
 {
     if (!isset($_POST['wyslij'])) return;
 
-    $imie = $_POST['imie'];
-    $email = $_POST['email'];
-    $wiadomosc = $_POST['wiadomosc'];
+    $mail = new PHPMailer(true);
 
-    $to = "twoj_email@domena.pl"; // ← wpisz tu docelowy adres
-    $temat = "Wiadomość z formularza kontaktowego";
-    $tresc = "Od: $imie <$email>\n\nTreść wiadomości:\n$wiadomosc";
+    try {
+        global $smtp_host, $smtp_user, $smtp_pass, $smtp_port;
 
-    $naglowki = "From: $email\r\nReply-To: $email\r\n";
+        // konfiguracja SMTP
+        $mail->isSMTP();
+        $mail->Host = $smtp_host;
+        $mail->SMTPAuth = true;
+        $mail->Username = $smtp_user;
+        $mail->Password = $smtp_pass;
+        $mail->Port = $smtp_port;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 
-    if (mail($to, $temat, $tresc, $naglowki)) {
-        echo "<div style='color:green;'>Wiadomość została wysłana!</div>";
-    } else {
-        echo "<div style='color:red;'>Błąd podczas wysyłania wiadomości.</div>";
+        // nadawca
+        $mail->setFrom($_POST['email'], $_POST['imie']);
+        // odbiorca
+        $mail->addAddress($smtp_user);
+
+        // treści
+        $mail->Subject = $_POST['temat'];
+        $mail->Body = "Wiadomość od: ".$_POST['imie']."\nEmail: ".$_POST['email']."\n\nTreść:\n".$_POST['wiadomosc'];
+
+        $mail->send();
+        echo "<p style='color:green;'>Wiadomość wysłana poprawnie!</p>";
+
+    } catch (Exception $e) {
+        echo "<p style='color:red;'>Błąd wysyłania maila: {$mail->ErrorInfo}</p>";
     }
 }
 
+
+// -----------------------------------------------------
+// 3. Przypominanie hasła admina (SMTP)
+// -----------------------------------------------------
 function PrzypomnijHaslo()
 {
-    global $login, $pass; // z cfg.php
+    global $login, $pass, $smtp_host, $smtp_user, $smtp_pass, $smtp_port;
 
-    echo '
-    <h2>Przypomnienie hasła administratora</h2>
+    echo "
+    <h2>Przypominanie hasła</h2>
+    <p>Wprowadź email administratora, aby wysłać dane logowania.</p>
 
-    <form method="post" action="">
-        Podaj e-mail administratora:<br>
-        <input type="email" name="email_admin" required><br><br>
-
-        <input type="submit" name="przypomnij" value="Przypomnij hasło">
+    <form method='post'>
+        Email admina:<br>
+        <input type='email' name='email_admina' required><br><br>
+        <input type='submit' name='przypomnij_haslo' value='Wyślij hasło'>
     </form>
-    ';
+    ";
 
-    // po wysłaniu formularza:
-    if (isset($_POST['przypomnij'])) {
+    if (!isset($_POST['przypomnij_haslo'])) return;
 
-        $email = $_POST['email_admin'];
+    if ($_POST['email_admina'] !== $smtp_user) {
+        echo "<p style='color:red;'>Ten email nie jest zarejestrowany jako admin!</p>";
+        return;
+    }
 
-        $to = $email;
-        $temat = "Przypomnienie hasła do panelu admina";
-        $tresc = "Login: $login\nHasło: $pass\n\nUWAGA: nie przekazuj tego maila dalej!";
-        $naglowki = "From: no-reply@twojastrona.pl\r\n";
+    $mail = new PHPMailer(true);
 
-        if (mail($to, $temat, $tresc, $naglowki)) {
-            echo "<div style='color:green;'>Hasło zostało wysłane na podany email!</div>";
-        } else {
-            echo "<div style='color:red;'>Błąd podczas wysyłania maila!</div>";
-        }
+    try {
+        // konfiguracja SMTP
+        $mail->isSMTP();
+        $mail->Host = $smtp_host;
+        $mail->SMTPAuth = true;
+        $mail->Username = $smtp_user;
+        $mail->Password = $smtp_pass;
+        $mail->Port = $smtp_port;
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+
+        $mail->setFrom($smtp_user, "Panel CMS");
+        $mail->addAddress($_POST['email_admina']);
+
+        $mail->Subject = "Przypomnienie hasła - Panel Admina";
+        $mail->Body = "Login: $login\nHasło: $pass\n\nUwaga! Nie udostępniaj tych danych nikomu.";
+
+        $mail->send();
+
+        echo "<p style='color:green;'>Hasło zostało wysłane na email administratora.</p>";
+
+    } catch (Exception $e) {
+        echo "<p style='color:red;'>Błąd wysyłania maila: {$mail->ErrorInfo}</p>";
     }
 }
 ?>
