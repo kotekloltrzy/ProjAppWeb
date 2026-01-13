@@ -1,0 +1,137 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sty 13, 2026 at 08:30 PM
+-- Wersja serwera: 10.4.32-MariaDB
+-- Wersja PHP: 8.2.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `moja_strona174748`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `kategorie`
+--
+
+CREATE TABLE `kategorie` (
+  `id` int(11) NOT NULL,
+  `matka` int(11) NOT NULL DEFAULT 0,
+  `nazwa` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `page_list`
+--
+
+CREATE TABLE `page_list` (
+  `id` int(11) NOT NULL,
+  `page_title` varchar(255) NOT NULL,
+  `page_content` text NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `page_list`
+--
+
+INSERT INTO `page_list` (`id`, `page_title`, `page_content`, `status`) VALUES
+(1, 'glowna', '<div class=\"strgbody1\">\r\n    <img class=\"strgobraz\" src=\"img/fjordy4.jpg\">\r\n    <p><b>\r\n        <br>\r\n        Norweskie fiordy uważane jako jedne z najpiękniejszych miejsc na świecie<br>\r\n        <br>\r\n        Na ich majestatycznych klifach można poczuć się jak na granicy snu i rzeczywistości<br>\r\n        <br>\r\n        Woda jest tak spokojna, że odbija niebo jak lustro <br>\r\n        <br>\r\n        Każdy oddech tam wydaje się czysty, głębszy, bardziej prawdziwy <br>\r\n        <br>\r\n        Cisza między górami ma w sobie coś mistycznego. <br>\r\n        <br>\r\n        Zieleń traw kontrastuje z szarością skał w idealnej harmonii. <br>\r\n        <br>\r\n        Czasem mgła spowija wszystko, jakby chciała zachować tę tajemnicę. <br>\r\n        <br>\r\n        Każdy fiord ma swoją duszę, swój rytm i historię. <br>\r\n        <br>\r\n        Żadne zdjęcie nie odda tego uczucia spokoju i zachwytu. <br>\r\n        <br>\r\n    </b></p>\r\n</div>\r\n\r\n<div class=\"strgbody1 kolorujtlo\">\r\n    <form method=\"post\" name=\"background\">\r\n        <input class=\"buttonkoloruj button6\" type=\"button\" value=\"żółty\" onclick=\"changeBackground(\'#FFF000\')\">\r\n        <input class=\"buttonkoloruj button7\" type=\"button\" value=\"czarny\" onclick=\"changeBackground(\'#000000\')\">\r\n        <input class=\"buttonkoloruj button8\" type=\"button\" value=\"biały\" onclick=\"changeBackground(\'#FFFFFF\')\">\r\n        <input class=\"buttonkoloruj button9\" type=\"button\" value=\"zielony\" onclick=\"changeBackground(\'#00FF00\')\">\r\n        <input class=\"buttonkoloruj button10\" type=\"button\" value=\"niebieski\" onclick=\"changeBackground(\'#0000FF\')\">\r\n        <input class=\"buttonkoloruj button11\" type=\"button\" value=\"pomarańczowy\" onclick=\"changeBackground(\'#FF8000\')\">\r\n        <input class=\"buttonkoloruj button12\" type=\"button\" value=\"szary\" onclick=\"changeBackground(\'#c0c0c0\')\">\r\n        <input class=\"buttonkoloruj button13\" type=\"button\" value=\"czerwony\" onclick=\"changeBackground(\'#FF0000\')\">\r\n    </form>\r\n</div>\r\n\r\n<div class=\"strgbody1\">\r\n    <b>Data: <span id=\"data\"></span>, <span id=\"zegarek\"></span></b>\r\n</div>\r\n\r\n<div id=\"animacjaTestowa1\" class=\"test-block\">\r\n    Kliknij a się powiększe\r\n</div>\r\n<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\r\n<script>\r\n    $(\"#animacjaTestowa1\").on(\"click\", function(){\r\n        $(this).animate({\r\n            width: \"500px\",\r\n            opacity: 0.4,\r\n            fontsize: \"3em\",\r\n            borderwidth: \"10px\"\r\n        }, 1500);\r\n    });\r\n</script>\r\n\r\n<div id=\"animacjaTestowa2\" class=\"test-block\">\r\n    Najedź kursorem, a się powiększe\r\n</div>\r\n\r\n<script>\r\n    $(\"#animacjaTestowa2\").on({\r\n        \"mouseover\" : function() {\r\n            $(this).animate({\r\n                width: 300\r\n            }, 800);\r\n        },\r\n        \"mouseout\" : function(){\r\n            $(this).animate({\r\n                width: 200\r\n            }, 800);\r\n        }\r\n    });\r\n</script>\r\n\r\n<div id=\"animacjaTestowa3\" class=\"test-block\">\r\n    Klikaj, abym urósł\r\n</div>\r\n\r\n<script>\r\n    $(\"#animacjaTestowa3\").on(\"click\", function(){\r\n        if (!$(this).is(\":animated\")) {\r\n            $(this).animate({\r\n                width: \"+=\" + 50,\r\n                height: \"+=\" + 10,\r\n                opacity: \"-=\" + 0.1,\r\n                duration: 3000\r\n            });\r\n        }\r\n    });\r\n</script>\r\n', 1),
+(2, 'lokacja', '    <div class=\"lokacjabody\">\r\n        <img class=\"lokacjaobraz\" src=\"img/fjordy-mapa.jpg\">\r\n        <p><b>\r\n            Norweskie fiordy rozciągają się wzdłuż zachodniego wybrzeża Norwegii, tworząc jedne z najbardziej malowniczych krajobrazów na świecie.<br><br>\r\nNa mapie widać ich gęstą sieć – od Stavanger na południu aż po Bodø na północy – a każdy z nich ma swój wyjątkowy urok i charakter.<br><br>\r\nPodróż fiordowym szlakiem często zaczyna się w Bergen, znanym jako „brama do fiordów”.<br><br>\r\nTo miasto otoczone górami i wodą stanowi doskonały punkt wypadowy do dalszej eksploracji.<br><br>\r\nStamtąd można dotrzeć do Flåm, małej miejscowości położonej głęboko w sercu Aurlandsfjordu, który jest odnogą słynnego Sognefjordu – najdłuższego fiordu w Norwegii.<br><br>\r\nKierując się dalej na północ, trafiamy do Geiranger i Hellesylt – dwóch miejsc otaczających majestatyczny Geirangerfjord, wpisany na listę UNESCO.<br><br>\r\nTo jedno z najbardziej znanych miejsc w Norwegii, z wodospadami „Siedem Sióstr” i „Welonem Panny Młodej”, które spływają po stromych klifach prosto do lazurowej wody.<br><br>\r\nNieco dalej leży Ålesund, miasto o niezwykłej architekturze art nouveau, rozłożone na wyspach i wznoszące się nad Atlantykiem.<br><br>\r\nJeszcze dalej na północ znajduje się Trondheim, dawna stolica kraju i jedno z najstarszych miast Norwegii.\r\nNa południu natomiast można odwiedzić Haugesund i Stavanger, w pobliżu których znajdują się takie cuda natury jak Lysefjord i słynna skała Preikestolen (Pulpit Rock), zawieszona 600 metrów nad wodą.<br><br>\r\nWszystkie te miejsca łączy jedno — niezwykłe połączenie surowej natury i spokojnej harmonii.<br><br>\r\nFiordy Norwegii, rozciągające się między Oslo a Bergen, aż po północne Bodø, tworzą pejzaż, który raz zobaczony, zostaje w pamięci na zawsze.<br><br>\r\n        </b></p>\r\n    </div>\r\n\r\n    <script src=\"kolorujtlo.js\" type=\"text/JavaScript\"></script>\r\n\r\n    <div class=\"lokacjabody kolorujtlo\">\r\n\r\n        <form method=\"post\" name=\"background\">\r\n            <input class=\"buttonkoloruj button6\" type=\"button\" value=\"żółty\" onclick=\"changeBackground(\'#FFF000\')\">\r\n            <input class=\"buttonkoloruj button7\" type=\"button\" value=\"czarny\" onclick=\"changeBackground(\'#000000\')\">\r\n            <input class=\"buttonkoloruj button8\" type=\"button\" value=\"biały\" onclick=\"changeBackground(\'#FFFFFF\')\">\r\n            <input class=\"buttonkoloruj button9\" type=\"button\" value=\"zielony\" onclick=\"changeBackground(\'#00FF00\')\">\r\n            <input class=\"buttonkoloruj button10\" type=\"button\" value=\"niebieski\" onclick=\"changeBackground(\'#0000FF\')\">\r\n            <input class=\"buttonkoloruj button11\" type=\"button\" value=\"pomarańczowy\" onclick=\"changeBackground(\'#FF8000\')\">\r\n            <input class=\"buttonkoloruj button12\" type=\"button\" value=\"szary\" onclick=\"changeBackground(\'#c0c0c0\')\">\r\n            <input class=\"buttonkoloruj button13\" type=\"button\" value=\"czerwony\" onclick=\"changeBackground(\'#FF0000\')\">\r\n        </form>\r\n\r\n    </div>', 1),
+(3, 'historia', '    <div class=\"historiabody\">\r\n        <img class=\"historiaobraz1\" src=\"img/stare1.png\">\r\n        <ol>\r\n            <b><li>Powstanie fiordów – ślad epoki lodowcowej<br><br></b>\r\n            Fiordy Norwegii powstały w wyniku działalności lodowców podczas ostatniej epoki lodowcowej (ok. 2,6 mln – 11 tys. lat temu).<br>\r\n            Lodowce żłobiły głębokie doliny w skałach, które po ich cofnięciu zostały zalane wodami Morza Norweskiego.<br>\r\n            To dlatego fiordy są tak głębokie — niektóre mają nawet ponad 1300 metrów głębokości (np. Sognefjord).<br><br><br>\r\n            <b><li>Fiordy – szlaki Wikingów<br><br></b>\r\n            W epoce wikingów (ok. VIII–XI w.) fiordy były głównymi szlakami komunikacyjnymi.<br>\r\n            To nimi Wikingowie wypływali na swoje wyprawy handlowe i wojenne.<br>\r\n            Wiele ważnych osad, jak Bergen, Trondheim czy Stavanger, powstało właśnie nad fiordami.<br><br><br>\r\n            <b><li>Bergen – brama do fiordów i ośrodek Hanzy<br><br></b>\r\n            Miasto Bergen, położone nad Byfjorden, od średniowiecza było kluczowym portem handlowym.<br>\r\n            W XIV wieku weszło w skład Hanzy, niemieckiego związku kupieckiego.<br>\r\n            Dzięki fiordom Bergen mogło utrzymywać handel z Europą, eksportując głównie ryby i drewno.<br><br><br>\r\n           <img class=\"historiaobraz2\" src=\"img/stare2.jpg\">    \r\n            <b><li>Fiordy jako naturalne twierdze<br><br></b>\r\n            Fiordy często służyły jako naturalne obronne porty.<br>\r\n            Strome ściany i wąskie wejścia utrudniały ataki od strony morza.<br>\r\n            Podczas II wojny światowej wiele fiordów wykorzystywano jako bazy niemieckich okrętów wojennych – np. w Trondheimfjorden stacjonował pancernik Tirpitz.<br><br><br>\r\n            <b><li>Fiordy a rozwój żeglugi i eksploracji<br><br></b>\r\n            Norwegowie od wieków byli znakomitymi żeglarzami, a życie nad fiordami wymagało umiejętności poruszania się po wodzie.<br>\r\n            To właśnie z takich tradycji zrodzili się później wielcy odkrywcy, jak Roald Amundsen – pierwszy człowiek na biegunie południowym.<br><br><br>\r\n            <b><li>Fiordy jako dziedzictwo UNESCO<br><br></b>\r\n            Kilka norweskich fiordów wpisano na Listę Światowego Dziedzictwa UNESCO ze względu na ich wyjątkowe walory przyrodnicze i kulturowe.<br>\r\n            Należą do nich m.in. Geirangerfjord i Nærøyfjord (od 2005 r.).<br>\r\n            <a href=\"https://www.unesco.pl/kultura/dziedzictwo-kulturowe/swiatowe-dziedzictwo/lista-swiatowego-dziedzictwa/europa-i-ameryka-polnocna/norwegia/\">Komitet do spraw UNESCO</a><br><br><br>\r\n            <b><li>Życie na fiordach – trudne, ale piękne<br><br></b>\r\n            Dawniej rolnicy i rybacy mieszkający na stromych zboczach fiordów prowadzili bardzo surowe życie.<br>\r\n            Niektóre farmy, jak Skageflå nad Geirangerfjordem, były dostępne tylko łodzią lub po stromych ścieżkach – co dobrze pokazuje, jak odizolowane były te społeczności.<br>\r\n        </ol>\r\n    </div>\r\n\r\n    <script src=\"kolorujtlo.js\" type=\"text/JavaScript\"></script>\r\n\r\n    <div class=\"historiabody kolorujtlo\">\r\n\r\n        <form method=\"post\" name=\"background\">\r\n            <input class=\"buttonkoloruj button6\" type=\"button\" value=\"żółty\" onclick=\"changeBackground(\'#FFF000\')\">\r\n            <input class=\"buttonkoloruj button7\" type=\"button\" value=\"czarny\" onclick=\"changeBackground(\'#000000\')\">\r\n            <input class=\"buttonkoloruj button8\" type=\"button\" value=\"biały\" onclick=\"changeBackground(\'#FFFFFF\')\">\r\n            <input class=\"buttonkoloruj button9\" type=\"button\" value=\"zielony\" onclick=\"changeBackground(\'#00FF00\')\">\r\n            <input class=\"buttonkoloruj button10\" type=\"button\" value=\"niebieski\" onclick=\"changeBackground(\'#0000FF\')\">\r\n            <input class=\"buttonkoloruj button11\" type=\"button\" value=\"pomarańczowy\" onclick=\"changeBackground(\'#FF8000\')\">\r\n            <input class=\"buttonkoloruj button12\" type=\"button\" value=\"szary\" onclick=\"changeBackground(\'#c0c0c0\')\">\r\n            <input class=\"buttonkoloruj button13\" type=\"button\" value=\"czerwony\" onclick=\"changeBackground(\'#FF0000\')\">\r\n        </form>\r\n\r\n    </div>', 1),
+(4, 'ciekawostki', '    <div class=\"ciekawostkibody\">\r\n        <ul>\r\n        <li><b>Norwegia ma ponad 1000 fiordów</b><br><br>\r\n\r\n        Choć najczęściej mówi się o kilku słynnych (np. Geirangerfjord czy Sognefjord), w rzeczywistości Norwegia ma ponad 1 100 fiordów rozciągających się wzdłuż całego wybrzeża.</li><br><br>\r\n\r\n        <li><b>Sognefjord to „król fiordów”</b><br><br>\r\n\r\n        Sognefjord jest najdłuższym i najgłębszym fiordem Norwegii – ma 204 km długości i sięga 1 308 m głębokości. Gdyby postawić w nim wieżowiec Burdż Chalifa (828 m), zniknąłby pod wodą.</li><br><br>\r\n\r\n        <li><b>Fiordy nigdy nie zamarzają</b><br><br>\r\n\r\n        Mimo że leżą bardzo daleko na północy, większość fiordów nie zamarza zimą. Dzieje się tak dzięki ciepłemu Prądowi Zatokowemu (Golfstromowi), który ogrzewa wody u norweskich wybrzeży.</li><br><br>\r\n\r\n        <li><b>Fiordy w filmach i grach</b><br><br>\r\n\r\n        Norweskie fiordy stały się inspiracją dla filmowców i twórców gier:<br>\r\n\r\n        W filmie „Kraina lodu” (Frozen) krajobrazy Arendelle wzorowano na fiordach zachodniej Norwegii.<br>\r\n\r\n        Sceny do filmu „Mission: Impossible – Fallout” kręcono na klifie Preikestolen nad Lysefjordem.</li><br><br>\r\n\r\n        <li><b>Fiordy przyciągają miliony turystów</b><br><br>\r\n\r\n        Każdego roku fiordy odwiedza ponad 2 miliony turystów, z czego wielu przypływa ogromnymi statkami wycieczkowymi. Norwegowie dbają jednak o ekologię – część fiordów ma być całkowicie wolna od statków spalinowych już w najbliższych latach.</li><br><br>\r\n\r\n        <li><b>Pod wodą fiordy kryją zatopione wraki</b><br><br>\r\n\r\n        W wielu fiordach (np. w Narvikfjorden) znajdują się wraki z czasów II wojny światowej, w tym niemieckie i brytyjskie okręty. Dziś są one popularnymi miejscami dla nurków.</li><br><br>\r\n\r\n        <li><b>Nazwa „fjord” pochodzi z języka staronordyckiego</b><br><br>\r\n\r\n        Słowo fjordr oznaczało „drogę wzdłuż wody” lub „miejsce, przez które się przepływa”. To pokazuje, jak ważną rolę odgrywały fiordy w komunikacji dawnych Norwegów.</li><br><br>\r\n\r\n        <li><b>Ciekawostka ekologiczna</b><br><br>\r\n\r\n        Fiordy tworzą unikalny mikroklimat – łagodne zimy i wilgotne lata sprawiają, że na jednym zboczu mogą rosnąć rośliny subarktyczne, a na drugim prawie śródziemnomorskie (np. jabłonie czy wiśnie w regionie Hardangerfjord).</li><br><br>\r\n        </ul>\r\n    </div>\r\n\r\n    <script src=\"kolorujtlo.js\" type=\"text/JavaScript\"></script>\r\n\r\n    <div class=\"ciekawostkibody kolorujtlo\">\r\n\r\n        <form method=\"post\" name=\"background\">\r\n            <input class=\"buttonkoloruj button6\" type=\"button\" value=\"żółty\" onclick=\"changeBackground(\'#FFF000\')\">\r\n            <input class=\"buttonkoloruj button7\" type=\"button\" value=\"czarny\" onclick=\"changeBackground(\'#000000\')\">\r\n            <input class=\"buttonkoloruj button8\" type=\"button\" value=\"biały\" onclick=\"changeBackground(\'#FFFFFF\')\">\r\n            <input class=\"buttonkoloruj button9\" type=\"button\" value=\"zielony\" onclick=\"changeBackground(\'#00FF00\')\">\r\n            <input class=\"buttonkoloruj button10\" type=\"button\" value=\"niebieski\" onclick=\"changeBackground(\'#0000FF\')\">\r\n            <input class=\"buttonkoloruj button11\" type=\"button\" value=\"pomarańczowy\" onclick=\"changeBackground(\'#FF8000\')\">\r\n            <input class=\"buttonkoloruj button12\" type=\"button\" value=\"szary\" onclick=\"changeBackground(\'#c0c0c0\')\">\r\n            <input class=\"buttonkoloruj button13\" type=\"button\" value=\"czerwony\" onclick=\"changeBackground(\'#FF0000\')\">\r\n        </form>\r\n\r\n    </div>', 1),
+(5, 'faunaFlora', '    <div class=\"faunaflorabody\">\r\n\r\n        <table class=\"tabela\">\r\n            <tr>\r\n                <th colspan=\"3\">Fauna</th>\r\n                <th colspan=\"3\">Flora</th>\r\n            </tr>\r\n            <tr>\r\n                <td rowspan=\"4\">Ssaki morskie</td><td>Orki</td><td>Można je spotkać w północnych fiordach. To jedne z największych<br>drapieżników morskich</td>\r\n                <td rowspan=\"9\">Drzewa i krzewy</td><td>Brzozy</td><td rowspan=\"3\">Dominują w niższych partiach fiordów</td>\r\n            </tr><tr>\r\n                <td>Humbaki</td><td>Pojawiają się w fiordach zimą, kiedy polują na ławice śledzi</td>\r\n                <td>Sosny</td>\r\n            </tr><tr>\r\n                <td>Foki</td><td>Często wylegują się na skałach przy ujściach fiordów</td>\r\n                <td>Świerki</td>\r\n            </tr><tr>\r\n                <td>Morświny</td><td>Małe krewniaki delfinów, żyjące w spokojniejszych wodach fiordów</td>\r\n                <td>Jarzębiny</td><td rowspan=\"3\">Często rosną na zboczach i w dolinach rzecznych</td>\r\n            </tr><tr>\r\n                <td rowspan=\"5\">Ryby</td><td>Śledź</td><td rowspan=\"4\">To najczęściej występujące gatunki, ważne również dla norweskiego<br>rybołustwa</td>\r\n                <td>Olsze</td>\r\n            </tr><tr>\r\n                <td>Dorsz</td>\r\n                <td>Wierzby</td>\r\n            </tr><tr>\r\n                <td>Makrela</td>\r\n                <td>Krzewinki borówki</td><td rowspan=\"3\">Występują wyżej, w chłodniejszych rejonach</td>\r\n            </tr><tr>\r\n                <td>Czarniak</td>\r\n                <td>Wrzosy</td>\r\n            </tr><tr>\r\n                <td>Łosoś atlantycki</td><td>Częsty w górnych odcinkach fiordów, gdzie wody są słodsze<br>Norwegia jest jednym z największych prodecentów hodowlanego łososia</td>\r\n                <td>Jałowce</td>\r\n            </tr><tr>\r\n                <td rowspan=\"6\">Ptaki</td><td>Bielik zwyczajny</td><td>Majestatyczny drapieżnik, często widziany nad Geirangerfjordem i Sognefjordem</td>\r\n                <td rowspan=\"6\">Rośliny łąkowe<br>i górskie</td><td>Dzwonki</td><td rowspan=\"4\">Typowe dla górskich zboczy nad fiordami</td>\r\n            </tr><tr>\r\n                <td>Maskonury</td><td>Urocze ptaki morskie z kolorowymi dziobami, żyjące na klifach wybrzeża</td>\r\n                <td>Jaskry</td>\r\n            </tr><tr>\r\n                <td>Mewy</td><td rowspan=\"3\">Powszechne wzdłuż fiordów; tworzą duże kolonie lęgowe</td>\r\n                <td>Fiołki arktyczne</td>\r\n            </tr><tr>\r\n                <td>Kormorany</td>\r\n                <td>Skalnice</td>\r\n            </tr><tr>\r\n                <td>Edredony</td>\r\n                <td>Mchy</td><td rowspan=\"2\">Pokrywają skały i tworzą miękkie dywany w wilgotnym klimacie</td>\r\n            </tr><tr>\r\n                <td>Sowy</td><td>Żyją w lasach otaczających</td>\r\n                <td>Porosty</td>\r\n            </tr><tr>\r\n                <td rowspan=\"6\">Ssaki lądowe</td><td>Jelenie</td><td rowspan=\"3\">Spotykane na terenach leśnych i górskich wokół fiordów</td>\r\n                <td rowspan=\"6\">Roślinność morska</td><td>Wodorosty</td><td rowspan=\"2\">tworzą podwodne lasy wzdłuż brzegów fiordów; są schronieniem dla ryb i skorupiaków</td>\r\n            </tr><tr>\r\n                <td>Łosie</td>\r\n                <td>Glony brunatne</td>\r\n            </tr><tr>\r\n                <td>Renifery</td>\r\n                <td>Zielenice</td><td rowspan=\"2\">Występują w płytszych wodach</td>\r\n            </tr><tr>\r\n                <td>Lisy polarne</td><td rowspan=\"2\">Źyją w chłodniejszych rejonach</td>\r\n                <td>Krasnorosty</td>\r\n            </tr><tr>\r\n                <td>Kuny</td>\r\n                <td>Ulwa sałatowa</td><td>Zielony glon wyglądający jak liście sałaty występujący przy skałach i przystaniach</td>\r\n            </tr><tr>\r\n                <td>Owce</td><td>Typowy widok na boczach fiordów; często pasą się niam pionowo na wodą</td>\r\n                <td>Alaria jadalna</td><td>Ma zastosowanie w kuchni i produkcji suplementów diety</td>\r\n            </tr>\r\n\r\n        </table>\r\n    \r\n    </div>\r\n\r\n    <script src=\"kolorujtlo.js\" type=\"text/JavaScript\"></script>\r\n\r\n    <div class=\"faunaflorabody kolorujtlo\">\r\n\r\n        <form method=\"post\" name=\"background\">\r\n            <input class=\"buttonkoloruj button6\" type=\"button\" value=\"żółty\" onclick=\"changeBackground(\'#FFF000\')\">\r\n            <input class=\"buttonkoloruj button7\" type=\"button\" value=\"czarny\" onclick=\"changeBackground(\'#000000\')\">\r\n            <input class=\"buttonkoloruj button8\" type=\"button\" value=\"biały\" onclick=\"changeBackground(\'#FFFFFF\')\">\r\n            <input class=\"buttonkoloruj button9\" type=\"button\" value=\"zielony\" onclick=\"changeBackground(\'#00FF00\')\">\r\n            <input class=\"buttonkoloruj button10\" type=\"button\" value=\"niebieski\" onclick=\"changeBackground(\'#0000FF\')\">\r\n            <input class=\"buttonkoloruj button11\" type=\"button\" value=\"pomarańczowy\" onclick=\"changeBackground(\'#FF8000\')\">\r\n            <input class=\"buttonkoloruj button12\" type=\"button\" value=\"szary\" onclick=\"changeBackground(\'#c0c0c0\')\">\r\n            <input class=\"buttonkoloruj button13\" type=\"button\" value=\"czerwony\" onclick=\"changeBackground(\'#FF0000\')\">\r\n        </form>\r\n\r\n    </div>', 1),
+(6, 'filmy', '<div vlass=\"filmybody\">\r\n     <iframe width=\"840\" height=\"630\"\r\n    src=\"https://www.youtube.com/watch?v=78Av6usUp6k\">\r\n    </iframe><br>\r\n     <iframe width=\"840\" height=\"630\"\r\n    src=\"https://www.youtube.com/watch?v=kOXy0gmgrhU\">\r\n    </iframe><br>\r\n</div>', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `produkty`
+--
+
+CREATE TABLE `produkty` (
+  `id` int(11) NOT NULL,
+  `tytul` varchar(255) NOT NULL,
+  `opis` text NOT NULL,
+  `data_utworzenia` date NOT NULL,
+  `data_modyfikacji` date NOT NULL,
+  `data_wygasniecia` date NOT NULL,
+  `cena_netto` varchar(255) NOT NULL,
+  `podatek_vat` int(11) NOT NULL,
+  `ilosc_magazynowa` int(11) NOT NULL,
+  `status_dostepnosci` tinyint(1) NOT NULL,
+  `kategoria` int(11) NOT NULL,
+  `gabaryt_produktu` int(11) NOT NULL,
+  `zdjecie` blob DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produkty`
+--
+
+INSERT INTO `produkty` (`id`, `tytul`, `opis`, `data_utworzenia`, `data_modyfikacji`, `data_wygasniecia`, `cena_netto`, `podatek_vat`, `ilosc_magazynowa`, `status_dostepnosci`, `kategoria`, `gabaryt_produktu`, `zdjecie`) VALUES
+(2, 'mapa', 'prosta mapa', '2026-01-13', '2026-01-13', '2030-04-04', '21.37', 8, 1000, 1, 1, 1000, NULL);
+
+--
+-- Indeksy dla zrzutów tabel
+--
+
+--
+-- Indeksy dla tabeli `kategorie`
+--
+ALTER TABLE `kategorie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `page_list`
+--
+ALTER TABLE `page_list`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `produkty`
+--
+ALTER TABLE `produkty`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `kategorie`
+--
+ALTER TABLE `kategorie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `page_list`
+--
+ALTER TABLE `page_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `produkty`
+--
+ALTER TABLE `produkty`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

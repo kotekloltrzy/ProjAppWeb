@@ -68,6 +68,162 @@ function ListaPodstron()
 }
 
 /***********************************************************************
+ *  Sprawdzanie dostępności produktów
+ ***********************************************************************/
+
+function CzyDostepny($p) {
+    if (
+        $p['status_dostepnosci'] == 1 &&
+        $p['ilosc_magazynowa'] > 0 &&
+        strtotime($p['data_wygasniecia']) > time()
+    ) {
+        return "Dostępny";
+    } else {
+        return "Niedostępny";
+    }
+}
+
+/***********************************************************************
+ *  Pokazywanie produktów
+ ***********************************************************************/
+
+function PokazProdukty() {
+    global $mysqli;
+    $res = $mysqli->query("SELECT * FROM produkty ORDER BY id DESC");
+
+    echo "<table border='1'>
+    <tr>
+        <th>ID</th><th>Tytuł</th><th>Cena</th><th>Ilość</th><th>Status</th><th>Akcja</th>
+    </tr>";
+
+    while ($r = $res->fetch_assoc()) {
+        $status = CzyDostepny($r);
+
+        echo "<tr>
+            <td>{$r['id']}</td>
+            <td>{$r['tytul']}</td>
+            <td>{$r['cena_netto']} zł</td>
+            <td>{$r['ilosc_magazynowa']}</td>
+            <td>$status</td>
+            <td>
+                <a href='admin.php?prod_edit={$r['id']}'>Edytuj</a> |
+                <a href='admin.php?prod_del={$r['id']}'>Usuń</a>
+            </td>
+        </tr>";
+    }
+    echo "</table>";
+}
+
+/***********************************************************************
+ *  Dodawanie produktu
+ ***********************************************************************/
+
+function DodajProdukt() {
+    global $mysqli;
+
+    if (isset($_POST['prod_dodaj'])) {
+        $stmt = $mysqli->prepare("
+            INSERT INTO produkty
+            (tytul, opis, data_utworzenia, data_modyfikacji, data_wygasniecia,
+             cena_netto, podatek_vat, ilosc_magazynowa, status_dostepnosci,
+             kategoria, gabaryt_produktu, zdjecie)
+            VALUES (?, ?, CURDATE(), CURDATE(), ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+
+        $nullBlob = null;
+
+        $stmt->bind_param(
+            "sssdiiiiii",
+            $_POST['tytul'],      // s
+            $_POST['opis'],       // s
+            $_POST['data_wyg'],   // s 
+            $_POST['cena'],       // d
+            $_POST['vat'],        // i
+            $_POST['ilosc'],      // i
+            $_POST['status'],     // i
+            $_POST['kategoria'],  // i
+            $_POST['gabaryt'],    // i
+            $nullBlob             // i 
+        );
+
+        $stmt->execute();
+        echo "<div style='color:green'>Dodano produkt</div>";
+    }
+
+    echo "
+    <form method='post'>
+        Tytuł:<br><input name='tytul'><br>
+        Opis:<br><textarea name='opis'></textarea><br>
+        Data wygaśnięcia:<br><input type='date' name='data_wyg'><br>
+        Cena netto:<br><input name='cena'><br>
+        VAT:<br><input name='vat'><br>
+        Ilość:<br><input name='ilosc'><br>
+        Status (1/0):<br><input name='status'><br>
+        Kategoria ID:<br><input name='kategoria'><br>
+        Gabaryt:<br><input name='gabaryt'><br>
+        <br>
+        <button name='prod_dodaj'>Dodaj</button>
+    </form>";
+}
+
+/***********************************************************************
+ *  Edytowanie produktu
+ ***********************************************************************/
+
+function EdytujProdukt($id) {
+    global $mysqli;
+    $id = intval($id);
+
+    if (isset($_POST['prod_save'])) {
+        $stmt = $mysqli->prepare("
+            UPDATE produkty SET
+            tytul=?, opis=?, data_modyfikacji=CURDATE(), data_wygasniecia=?,
+            cena_netto=?, podatek_vat=?, ilosc_magazynowa=?, status_dostepnosci=?,
+            kategoria=?, gabaryt_produktu=?
+            WHERE id=?
+        ");
+
+        $stmt->bind_param(
+            "sssiiiiisi",
+            $_POST['tytul'], $_POST['opis'], $_POST['data_wyg'],
+            $_POST['cena'], $_POST['vat'], $_POST['ilosc'],
+            $_POST['status'], $_POST['kategoria'], $_POST['gabaryt'], $id
+        );
+
+        $stmt->execute();
+        echo "<div style='color:green'>Zapisano</div>";
+    }
+
+    $r = $mysqli->query("SELECT * FROM produkty WHERE id=$id")->fetch_assoc();
+
+    echo "
+    <form method='post'>
+        Tytuł:<input name='tytul' value='{$r['tytul']}'><br>
+        Opis:<textarea name='opis'>{$r['opis']}</textarea><br>
+        Data wyg:<input type='date' name='data_wyg' value='{$r['data_wygasniecia']}'><br>
+        Cena:<input name='cena' value='{$r['cena_netto']}'><br>
+        VAT:<input name='vat' value='{$r['podatek_vat']}'><br>
+        Ilość:<input name='ilosc' value='{$r['ilosc_magazynowa']}'><br>
+        Status:<input name='status' value='{$r['status_dostepnosci']}'><br>
+        Kategoria:<input name='kategoria' value='{$r['kategoria']}'><br>
+        Gabaryt:<input name='gabaryt' value='{$r['gabaryt_produktu']}'><br>
+        <button name='prod_save'>Zapisz</button>
+    </form>";
+}
+
+/***********************************************************************
+ *  Usuwanie produktu
+ ***********************************************************************/
+
+function UsunProdukt($id) {
+    global $mysqli;
+    $id = intval($id);
+    $mysqli->query("DELETE FROM produkty WHERE id=$id LIMIT 1");
+    echo "<div style='color:red'>Usunięto produkt</div>";
+}
+
+
+/***********************************************************************
  *  PODSTRONY – DODAWANIE
  ***********************************************************************/
 function DodajNowaPodstrone()
@@ -270,6 +426,8 @@ echo "
     <li><a href='admin.php?podstrony=1'>Podstrony</a></li>
     <li><a href='admin.php?dodaj=1'>Dodaj podstronę</a></li>
     <li><a href='admin.php?kategorie=1'>Kategorie</a></li>
+    <li><a href='admin.php?produkty=1'>Produkty</a></li>
+    <li><a href='admin.php?prod_add=1'>Dodaj produkt</a></li>
 </ul>
 <hr>
 ";
@@ -277,6 +435,13 @@ echo "
 /***********************************************************************
  *  OBSŁUGA AKCJI
  ***********************************************************************/
+if (isset($_GET['produkty'])) PokazProdukty();
+if (isset($_GET['prod_add'])) DodajProdukt();
+if (isset($_GET['prod_edit'])) EdytujProdukt($_GET['prod_edit']);
+if (isset($_GET['prod_del'])) {
+    UsunProdukt($_GET['prod_del']);
+    PokazProdukty();
+}
 if (isset($_GET['podstrony'])) ListaPodstron();
 if (isset($_GET['dodaj'])) DodajNowaPodstrone();
 if (isset($_GET['edit'])) EdytujPodstrone($_GET['edit']);
