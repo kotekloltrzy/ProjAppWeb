@@ -1,5 +1,4 @@
 <?php
-/* Inicjalizacja licznika */
 if (!isset($_SESSION['count'])) {
     $_SESSION['count'] = 0;
 }
@@ -23,7 +22,7 @@ function removeFromCard($nr) {
     unset($_SESSION["{$nr}_3"]);
 }
 
-// NOWA FUNKCJA: Czyści cały koszyk
+// Funckja czyszcząca koszyk
 function clearCard() {
     for ($i = 1; $i <= $_SESSION['count']; $i++) {
         removeFromCard($i);
@@ -38,7 +37,7 @@ function editCard($nr, $nowa_ilosc) {
 }
 
 function showCard($mysqli) {
-    // Sprawdzamy, czy w koszyku są jakieś aktywne produkty
+    // Sprawdzanie koszyka
     $pusty = true;
     for ($i = 1; $i <= $_SESSION['count']; $i++) {
         if (isset($_SESSION["{$i}_1"])) {
